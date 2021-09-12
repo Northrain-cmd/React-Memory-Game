@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import './App.css'
 import ScoreBoard from './components/UI/ScoreBoard'
 import CardsList from './components/Cards/CardsList'
+import StartButton from './components/UI/StartButton'
+import InfoButton from './components/UI/InfoButton'
+import BestScore from './components/UI/BestScore'
 
 function App() {
   const heroes = [
@@ -483,6 +486,14 @@ function App() {
   ]
   const [count, setCount] = useState(0)
 
+  const startGameHandler = () => {
+
+  }
+
+  const openInfoHandler = () => {
+
+  }
+
   return (
     <div className="App">
       <header>
@@ -491,6 +502,11 @@ function App() {
       <main>
         <CardsList heroes={heroes}></CardsList>
       </main>
+      <footer>
+        <InfoButton onCLick={openInfoHandler}>i</InfoButton>
+        <StartButton onCLick={startGameHandler}>Start</StartButton>
+        <BestScore></BestScore>
+      </footer>
     </div>
   )
 }

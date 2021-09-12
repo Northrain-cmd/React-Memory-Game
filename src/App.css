@@ -1,23 +1,59 @@
 .App {
   display: grid;
-  grid-template: repeat(4, 1fr) / repeat(5, 1fr)
+  grid-template: 15% repeat(3, 1fr) 15% / repeat(5, 1fr);
+  padding: 1%;
+  min-height: 0;
+  min-width: 0;
 }
 
 header{
-  margin: 1%;
-  grid-area: 1 / 2 / 2 / 5
+  grid-area: 1 / 2 / 2 / 5;
+  margin: 0 1%;
 }
 
 main {
-  margin: 0 2%;
   grid-area: 2 / 1 / 5 / 6;
-  
 }
 
-main > * {
+main > div {
   display: grid;
   grid-gap: 1em;
-  grid-template: repeat(3, 15%) / repeat(5, 15%);
+  grid-template: repeat(3, 8.5em) / repeat(5, 15%);
   justify-content: center;
+}
+
+footer {
+  grid-area: 5 / 1 / 6 / 6 ;
+  margin: 3% 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer > * {
+  margin: 2% 1%;
+}
+
+@media only screen and (max-width: 700px) {
+  .App {
+    grid-template: 15% repeat(5, 1fr) 10% / repeat(5, 1fr);
+  }
+  
+  header{
+    grid-area: 1 / 2 / 2 / 5;
+  }
+  
+  main {
+    grid-area: 2 / 1 / 7 / 6;
+  }
+  
+  main > div {
+    grid-template: repeat(5, 6em) / repeat(3, 20%);
+    margin-bottom: 15%;
+  }
+  
+  footer {
+    grid-area: 7 / 1 / 8 / 6 ;
+  }
 }
 
