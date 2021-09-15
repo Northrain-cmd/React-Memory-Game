@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import imgUrl from '../../icons/best.svg'
+import imgUrl from '../../assets/best.svg'
 
 const Wrapper = styled.div`
   display: flex;

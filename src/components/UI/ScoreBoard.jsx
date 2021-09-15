@@ -18,7 +18,7 @@ const Score = styled.p`
 const ScoreBoard = (props) => {
   return (
     <WrapperDiv>
-      <Score>Score: {props.score}</Score>
+      <Score>Score: {props.score || 0}</Score>
     </WrapperDiv>
   )
 }

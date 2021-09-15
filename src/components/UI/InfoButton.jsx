@@ -12,7 +12,7 @@ const Button = styled.button`
 
 const InfoButton = (props) => {
   return (
-    <Button type='button' onClick={props.onClick}>{props.children}</Button>
+    <Button type='button' onClick={props.openModal}>{props.children}</Button>
   )
 }
 

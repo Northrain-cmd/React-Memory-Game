@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
+import fallbackImg from '../../assets/wildcard.jpg'
 
 const StyledCard = styled.div`
   margin: 0;
@@ -20,9 +21,15 @@ const StyledImage = styled.img`
 `
 
 const Card = (props) => {
+  const [imageUrl, setImageUrl] = useState(props.image);
+
+  const onErrorHandler = () => {
+    setImageUrl(fallbackImg);
+  }
+
   return (
     <StyledCard>
-      <StyledImage src={props.image} alt="Character's image" />
+      <StyledImage src={imageUrl} alt="Character's image" onError={onErrorHandler} />
     </StyledCard>
   )
 }
