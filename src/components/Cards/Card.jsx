@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import fallbackImg from '../../assets/wildcard.jpg'
 
@@ -23,13 +23,18 @@ const StyledImage = styled.img`
 const Card = (props) => {
   const [imageUrl, setImageUrl] = useState(props.image);
 
-  const onErrorHandler = () => {
-    setImageUrl(fallbackImg);
+  const onLoadHandler = (e) => {
+    const height = e.target.naturalHeight;
+    const width = e.target.naturalWidth;
+    if(height === 171 && width === 300) {
+      setImageUrl(fallbackImg);
+      e.target.parentNode.dataset.id = '777';
+    }
   }
 
   return (
-    <StyledCard>
-      <StyledImage src={imageUrl} alt="Character's image" onError={onErrorHandler} />
+    <StyledCard data-id={props.heroID} onClick={props.heroClicked}>
+      <StyledImage src={imageUrl} alt="Character's image" onLoad={onLoadHandler} />
     </StyledCard>
   )
 }

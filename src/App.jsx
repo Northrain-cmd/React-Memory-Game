@@ -9,6 +9,9 @@ import InfoModal from "./components/UI/InfoModal";
 
 function App() {
   const [heroes, setHeroes] = useState([]);
+  const [clickedHeroes, setClickedHeroes] = useState({});
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
   const [showInfo, setShowInfo] = useState(false);
   const startGameHandler = () => {};
 
@@ -33,8 +36,6 @@ function App() {
     } catch (error) {
       console.log(error.message);
     }
-    console.log(heroes)
-
   }, []);
 
   const toggleInfoHandler = () => {
@@ -43,19 +44,35 @@ function App() {
     });
   };
 
+  const heroClickedHandler = (heroID) => {
+    if(clickedHeroes[heroID]) {
+      setBestScore(prevBest => Math.max(score, prevBest));
+      setScore(0);
+      setClickedHeroes({});
+    } else {
+      setScore(prevScore => prevScore + 1);
+      setClickedHeroes(prevState => {
+        return {
+          ...prevState,
+          ...{ [heroID]: true }
+        }
+      })
+    }
+  }
+
   return (
     <div className="App">
       {showInfo && <InfoModal closeModal={toggleInfoHandler} />}
       <header>
-        <ScoreBoard score=""></ScoreBoard>
+        <ScoreBoard score={score}></ScoreBoard>
       </header>
       <main>
-        <CardsList heroes={heroes}></CardsList>
+        <CardsList heroClicked={heroClickedHandler} heroes={heroes}></CardsList>
       </main>
       <footer>
         <InfoButton openModal={toggleInfoHandler}>i</InfoButton>
         <StartButton onCLick={startGameHandler}>Start</StartButton>
-        <BestScore></BestScore>
+        <BestScore score={bestScore}></BestScore>
       </footer>
     </div>
   );

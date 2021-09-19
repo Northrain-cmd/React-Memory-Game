@@ -27,7 +27,7 @@ const BestScore = (props) => {
   return (
     <Wrapper>
       <Image src={imgUrl} alt="Trophy Image" />
-      <Span>{props.best || 0} </Span>     
+      <Span>{props.score || 0} </Span>     
     </Wrapper>
   )
 }
