@@ -1,10 +1,13 @@
 {
   "name": "react-memory-game",
   "version": "0.0.0",
+  "homepage": "https://Northrain-cmd.github.io/React-Memory-Game",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "bootstrap": "5.1.0",
