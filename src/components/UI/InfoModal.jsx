@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Button } from "./StartButton";
 
 const Backdrop = styled.div`
   min-width: 100vw;
@@ -32,9 +31,13 @@ const Modal = styled.div`
   }
 `;
 
-const StyledButton = styled(Button)`
+const StyledButton = styled.button`
   padding: 1% 10%;
   font-size: 0.8em;
+  font-family: 'Jedi';
+  color: #121212;
+  background: #FFE81F;
+  border: 2px solid #FFFFFF;
   margin-bottom: 3%;
 `;
 

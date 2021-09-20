@@ -2,18 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import ScoreBoard from "./components/UI/ScoreBoard";
 import CardsList from "./components/Cards/CardsList";
-import StartButton from "./components/UI/StartButton";
 import InfoButton from "./components/UI/InfoButton";
+import StartButton from "./components/UI/StartButton";
 import BestScore from "./components/UI/BestScore";
 import InfoModal from "./components/UI/InfoModal";
+import LoadingSpinner from './components/UI/LoadingSpinner'
 
 function App() {
   const [heroes, setHeroes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [clickedHeroes, setClickedHeroes] = useState({});
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  const [refreshNeeded, setRefreshNeeded] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
-  const startGameHandler = () => {};
 
   const shuffle = (array) => {
     let n = array.length;
@@ -27,6 +29,7 @@ function App() {
 
   useEffect(async () => {
     try {
+      setIsLoading(true);
       const data = await fetch(
         "https://akabab.github.io/starwars-api/api/all.json"
       );
@@ -36,7 +39,8 @@ function App() {
     } catch (error) {
       console.log(error.message);
     }
-  }, []);
+    setIsLoading(false);
+  }, [refreshNeeded]);
 
   const toggleInfoHandler = () => {
     setShowInfo((prevState) => {
@@ -49,6 +53,7 @@ function App() {
       setBestScore(prevBest => Math.max(score, prevBest));
       setScore(0);
       setClickedHeroes({});
+      reloadHeroesHandler();
     } else {
       setScore(prevScore => prevScore + 1);
       setClickedHeroes(prevState => {
@@ -56,8 +61,13 @@ function App() {
           ...prevState,
           ...{ [heroID]: true }
         }
-      })
+      });
+      setHeroes(prev => shuffle(prev));
     }
+  }
+
+  const reloadHeroesHandler = () => {
+    setRefreshNeeded(prev => !prev);
   }
 
   return (
@@ -67,11 +77,12 @@ function App() {
         <ScoreBoard score={score}></ScoreBoard>
       </header>
       <main>
-        <CardsList heroClicked={heroClickedHandler} heroes={heroes}></CardsList>
+        { isLoading && <LoadingSpinner/> }
+        { !isLoading && <CardsList heroClicked={heroClickedHandler} heroes={heroes} /> }
       </main>
       <footer>
         <InfoButton openModal={toggleInfoHandler}>i</InfoButton>
-        <StartButton onCLick={startGameHandler}>Start</StartButton>
+        <StartButton onClickHandler={reloadHeroesHandler}>Refresh</StartButton>
         <BestScore score={bestScore}></BestScore>
       </footer>
     </div>

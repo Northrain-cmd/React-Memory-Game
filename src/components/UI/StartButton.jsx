@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const Button = styled.button`
+ const Button = styled.button`
   padding: 1% 8%;
   font-size: 1.5em;
   font-family: 'Jedi';
@@ -12,7 +12,7 @@ export const Button = styled.button`
 
 const StartButton = (props) => {
   return (
-    <Button type='button' onClick={props.onClick}>{props.children}</Button>
+    <Button type='button' onClick={props.onClickHandler}>{props.children}</Button>
   )
 }
 

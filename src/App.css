@@ -13,13 +13,20 @@ header{
 
 main {
   grid-area: 2 / 1 / 5 / 6;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-main > div {
+main > div:not(#spinner) {
   display: grid;
   grid-gap: 1em;
   grid-template: repeat(3, 8.5em) / repeat(5, 15%);
   justify-content: center;
+}
+
+main > #spinner {
+  margin: 5%;
 }
 
 footer {
